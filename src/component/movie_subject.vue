@@ -19,7 +19,15 @@
       <strong>{{average}}</strong>
       <span>{{movieSubject.comments_count}}人评价</span></p>
     <p class="meta">{{detail}}</p>
-    <a href="https://www.douban.com/doubanapp/app?model=B&amp;copy=1&amp;page=&amp;channel=m_ad_yingren&amp;direct_dl=1" class="open-app" rel="nofollow">用App查看影人资料</a></div>
+    <!-- <a href="https://www.douban.com/doubanapp/app?model=B&amp;copy=1&amp;page=&amp;channel=m_ad_yingren&amp;direct_dl=1" class="open-app" rel="nofollow">用App查看影人资料</a></div> -->
+</section>
+<section class="subject-intro">
+  <h2>{{movieSubject.title}}的剧情简介</h2>
+  <div class="bd" style="position: static;">
+    <p data-clamp="10">
+      {{summary}}
+    </p>
+  </div>
 </section>
 </div>
 </template>
@@ -32,7 +40,8 @@ export default {
       genres:'',
       imgUrl:'',
       average:'',
-      detail:''
+      detail:'',
+      summary:''
 		}
 	},
   mounted:function(){
@@ -43,6 +52,7 @@ export default {
       this.genres = response.body.genres.join(' / ');
       this.imgUrl = response.body.images.large;
       this.average = response.body.rating.average;
+      this.summary = response.body.summary;
       // console.log("演员数组",response.body.casts.name);
       // this.movieDetail = this.movieDetail(response.body.casts);
       // console.log(this.genres);
@@ -54,6 +64,9 @@ export default {
       console.log(this.detail);
       // console.log(casts);
     })
+    // this.$http.jsonp('https://api.douban.com/v2/movie/subject/'+this.$route.query.id+'/comments').then((response)=>{
+    //   console.log(response);
+    // })
   }
 }		
 </script>

@@ -2,7 +2,8 @@
 	<section id="movie_latest">
 	  <header>
 	    <h2>新片速递</h2>
-	    <a href="/movie/latest">更多</a></header>
+	    <!-- <a href="/movie/latest">更多</a> -->
+	  </header>
 	  <div class="section-content">
 <!-- 	    <ul class="row items">
 	      <li class="item item__movie">
@@ -24,26 +25,31 @@
 	      </li>
 	    </ul> -->
 	    <ul class="row items">
-			<li class="item item__movie" v-for="newMovie in newMovies">
-			  <a href="/movie/subject/25766838?refer=home">
-			  <router-link :to="{path:'movieSubject',query:{id:newMovie.id}}">
-			    <div class="item-poster" :style="{'backgroundImage':'url(' + newMovie.images.large + ')'}"></div>
-			    <span class="item-title">{{newMovie.title}}</span>
-			    <div class="item-rating">
-			      <div class="rank">
-			        <span class="rating-stars" v-if="newMovie.rating.average != 0" v-bind:data-rating="newMovie.rating.average/2">
-			          <span class="rating-star rating-star-small-full"></span>
-			          <span class="rating-star rating-star-small-full"></span>
-			          <span class="rating-star rating-star-small-full"></span>
-			          <span class="rating-star rating-star-small-gray"></span>
-			          <span class="rating-star rating-star-small-gray"></span>
-			        </span>
-			        <span v-if="newMovie.rating.average != 0">{{newMovie.rating.average}}</span>
-			        <span v-else>暂无评分</span>
-		          </div>
-			    </div>
-			  </router-link>
-			</li>
+	      <div v-show="loading" class="spinner">
+	        <div class="bounce1"></div>
+	        <div class="bounce2"></div>
+	        <div class="bounce3"></div>
+	      </div>
+				<li class="item item__movie" v-for="newMovie in newMovies">
+				  <a href="/movie/subject/25766838?refer=home">
+				  <router-link :to="{path:'movieSubject',query:{id:newMovie.id}}">
+				    <div class="item-poster" :style="{'backgroundImage':'url(' + newMovie.images.large + ')'}"></div>
+				    <span class="item-title">{{newMovie.title}}</span>
+				    <div class="item-rating">
+				      <div class="rank">
+				        <span class="rating-stars" v-if="newMovie.rating.average != 0" v-bind:data-rating="newMovie.rating.average/2">
+				          <span class="rating-star rating-star-small-full"></span>
+				          <span class="rating-star rating-star-small-full"></span>
+				          <span class="rating-star rating-star-small-full"></span>
+				          <span class="rating-star rating-star-small-gray"></span>
+				          <span class="rating-star rating-star-small-gray"></span>
+				        </span>
+				        <span v-if="newMovie.rating.average != 0">{{newMovie.rating.average}}</span>
+				        <span v-else>暂无评分</span>
+			          </div>
+				    </div>
+				  </router-link>
+				</li>
 	    </ul>
 	  </div>
 	</section>
@@ -52,7 +58,8 @@
 export default {
 	data () {
 		return {
-			newMovies:[]
+			newMovies:[],
+			loading:true
 		}
 	},
 	mounted:function(){
@@ -65,6 +72,7 @@ export default {
 		  // 这里是处理正确的回调
 		    console.log("新片速递:",response);
 		    this.newMovies = response.data["subjects"];
+		    this.loading = false;
 		    // console.log("新片速递:",this.newMovies);
 		    // console.log(response.bodyText);
 		    // this.articles = response.data["subjects"] 也可以
@@ -78,4 +86,50 @@ export default {
 </script>
 <style type="text/css" scoped>
 
+
+/*--动画效果--*/
+.spinner {
+  margin: 100px auto 0;
+  width: 150px;
+  text-align: center;
+}
+ 
+.spinner > div {
+  width: 30px;
+  height: 30px;
+  background-color: #67CF22;
+ 
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+  animation: bouncedelay 1.4s infinite ease-in-out;
+  /* Prevent first frame from flickering when animation starts */
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+ 
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+ 
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+ 
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0.0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+ 
+@keyframes bouncedelay {
+  0%, 80%, 100% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 40% {
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
 </style>
