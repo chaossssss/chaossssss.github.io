@@ -1,6 +1,6 @@
 # douban-vue
 
-> A Vue.js project
+> 希望是一个博客
 
 ## Build Setup
 
