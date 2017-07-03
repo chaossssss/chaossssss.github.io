@@ -1,24 +1,10 @@
-# douban-vue
+# 使用vue开发项目： 豆瓣 + 饿了么
 
 > 希望是一个博客
 
-## Build Setup
+> 豆瓣电影在线地址：https://chaossssss.github.io/   饿了么在线地址：https://chaossssss.github.io/elm
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-```
-
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
-
-
-### 总结
+### 豆瓣电影项目总结
 
 使用vue-cli搭建，vue全家桶开发(vue-resource,vue-router和vuex)，自己感觉对vue的基本指令已经掌握了，vuex还有很多不懂的地方，尤其是多个模块需要状态管理的情况下。使用了些ES6语法，基本上是import，export，箭头函数，let，const等等，没用到字符串模板有些遗憾。项目中没用到修饰符，过滤器，slot，ssr，一下子也没有想到可以用到的地方。目前就这么多，应该还有很多没有踩到。豆瓣提供的电影评价接口无法使用。
 
@@ -35,6 +21,6 @@ For detailed explanation on how things work, consult the [docs for vue-loader](h
 5.没用到gulp和webpack组合开发，相关配置教程不尽相同，感觉有一定难度
 
 
-在线地址:https://chaossssss.github.io/
+
 
 
